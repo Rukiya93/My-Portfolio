@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shella M. Catig — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E6;
+    --ink:#152621;
+    --ink-soft:#3D4E48;
+    --amber:#C4841F;
+    --sage:#6E8C74;
+    --line:#D9CFBB;
+    --card:#FCFAF3;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+
+  h1,h2,h3,.serif{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .layout{
+    display:flex;
+    min-height:100vh;
+  }
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    width:270px;
+    flex-shrink:0;
+    padding:40px 28px;
+    border-right:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    position:sticky;
+    top:0;
+    height:100vh;
+  }
+
+  .avatar{
+    width:64px; height:64px;
+    border-radius:50%;
+    background:linear-gradient(155deg,var(--sage),var(--ink));
+    display:flex; align-items:center; justify-content:center;
+    color:var(--paper);
+    font-family:'Fraunces',serif;
+    font-size:22px;
+    margin-bottom:16px;
+  }
+
+  .sb-name{font-size:19px; margin-bottom:2px;}
+  .sb-title{font-size:13px; color:var(--ink-soft); margin-bottom:28px;}
+
+  nav.sb-nav{display:flex; flex-direction:column; gap:2px; margin-bottom:auto;}
+
+  nav.sb-nav a{
+    font-size:14px;
+    padding:9px 10px;
+    border-radius:5px;
+    color:var(--ink-soft);
+    border-left:2px solid transparent;
+    transition:color .15s ease, border-color .15s ease, background .15s ease;
+  }
+  nav.sb-nav a:hover{color:var(--ink);}
+  nav.sb-nav a.active{
+    color:var(--ink);
+    border-left:2px solid var(--amber);
+    background:rgba(196,132,31,0.08);
+    font-weight:500;
+  }
+
+  .sb-social{
+    display:flex; gap:14px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .sb-social a:hover{color:var(--amber);}
+
+  /* ---------- MAIN ---------- */
+  main{flex:1; padding:56px 64px 100px;}
+
+  .hero{max-width:640px; margin-bottom:64px;}
+  .hero h1{font-size:44px; line-height:1.12; margin-bottom:18px;}
+  .hero p{font-size:16px; color:var(--ink-soft); max-width:520px; margin-bottom:26px;}
+
+  .btn{
+    display:inline-block;
+    background:var(--ink);
+    color:var(--paper);
+    padding:11px 22px;
+    border-radius:4px;
+    font-size:14px;
+    font-weight:500;
+    transition:background .15s ease;
+  }
+  .btn:hover{background:var(--amber);}
+
+  section{scroll-margin-top:40px; margin-bottom:64px;}
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:20px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:12px;
+  }
+  .section-head h2{font-size:24px;}
+  .section-head span{font-size:13px; color:var(--ink-soft);}
+
+  /* project cards */
+  .project{
+    display:grid;
+    grid-template-columns:160px 1fr;
+    gap:24px;
+    padding:24px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .project:last-child{border-bottom:none;}
+  .project-swatch{
+    height:110px;
+    border-radius:3px;
+  }
+  .project h3{font-size:18px; margin-bottom:6px;}
+  .project p{font-size:14.5px; color:var(--ink-soft); margin-bottom:10px;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-size:12px;
+    padding:3px 9px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--ink-soft);
+  }
+
+  /* generic grid for about / skills / credentials / services */
+  .grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+
+  .panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:26px;
+  }
+  .panel h3{font-size:16px; margin-bottom:12px;}
+  .panel p{font-size:14.5px; color:var(--ink-soft);}
+
+  .skill-tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .skill-tags .tag{background:var(--paper);}
+
+  .list-plain{list-style:none;}
+  .list-plain li{
+    font-size:14.5px;
+    padding:8px 0;
+    border-bottom:1px solid var(--line);
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+  }
+  .list-plain li:last-child{border-bottom:none;}
+  .list-plain li b{color:var(--ink); font-weight:500;}
+
+  .testimonial-placeholder{
+    border:1px dashed var(--line);
+    border-radius:4px;
+    padding:26px;
+    color:var(--ink-soft);
+    font-size:14px;
+    text-align:center;
+  }
+
+  footer{
+    padding:30px 64px 60px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    .sidebar{
+      width:100%;
+      height:auto;
+      position:relative;
+      flex-direction:row;
+      align-items:center;
+      gap:16px;
+      padding:20px 24px;
+      overflow-x:auto;
+    }
+    .sb-name, .sb-title{display:none;}
+    nav.sb-nav{flex-direction:row; gap:4px; margin-bottom:0;}
+    .sb-social{display:none;}
+    main{padding:36px 24px 80px;}
+    .hero h1{font-size:32px;}
+    .grid-2{grid-template-columns:1fr;}
+    .project{grid-template-columns:1fr;}
+    .project-swatch{height:90px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <img class="avatar" src="profile.jpg.jpg" alt="Shella Catig">
+    <div class="sb-name">Shella M. Catig</div>
+    <div class="sb-title">IS Student · Butuan City, PH</div>
+
+    <nav class="sb-nav" id="sb-nav">
+      <a href="#home" class="active">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#services">Services</a>
+      <a href="#testimonials">Testimonials</a>
+    </nav>
+
+    <div class="sb-social">
+      <a href="https://www.linkedin.com/in/shella-catig-a447442b0/" title="LinkedIn" target="_blank">LinkedIn</a>
+      <span>shellacatig040815@gmail.com</span>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <section id="home" class="hero">
+      <h1>I build the process, then get out of its way.</h1>
+      <p>Information Systems student in Butuan City with 5+ years of retail and admin work behind me — now building web systems and picking up data analytics alongside coursework.</p>
+      <a href="#contact" class="btn">Get in touch</a>
+    </section>
+
+    <section id="projects">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <span>Systems built to solve a real problem</span>
+      </div>
+
+      <div class="project">
+        <div class="project-swatch" style="background:linear-gradient(155deg,#6E8C74,#152621);"></div>
+        <div>
+          <h3>Prime Realty Homes</h3>
+          <p>A multi-role real estate web app with separate admin, agent, and client dashboards, built from the ground up across seven iterations. Added multi-image uploads, live chat, and unit availability tracking, then presented it as a midterm panel defense with a full BPM report.</p>
+          <div class="tag-row">
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">XAMPP</span>
+            <span class="tag">Role-based auth</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-swatch" style="background:linear-gradient(155deg,#C4841F,#3D4E48);"></div>
+        <div>
+          <h3>Style Stock — Boutique Inventory System</h3>
+          <p>A group research project designing an inventory system for a boutique retail setting, backed by a written research paper and a defense presentation.</p>
+          <div class="tag-row">
+            <span class="tag">Systems Design</span>
+            <span class="tag">Research</span>
+            <span class="tag">Team Project</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid-2">
+      <section id="about" class="panel" style="grid-column:span 2;">
+        <div class="section-head" style="border:none; padding:0; margin-bottom:14px;">
+          <h2 style="font-size:20px;">About</h2>
+        </div>
+        <p>I'm a BS Information Systems student at Butuan City Colleges, Inc., based in Butuan City, Caraga Region. Before this, I spent over 5+ years in retail and administrative work — which is where I first got interested in how much time gets lost to processes nobody ever wrote down. These days I split my time between coursework, building small web systems, and teaching myself data analytics tools on the side.</p>
+      </section>
+    </div>
+
+    <div class="grid-2">
+      <section id="skills" class="panel">
+        <h3>Tools I work with</h3>
+        <div class="skill-tags">
+          <span class="tag">PHP</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">phpMyAdmin</span>
+          <span class="tag">R</span>
+          <span class="tag">Google Sheets</span>
+          <span class="tag">Sublime Text</span>
+        </div>
+      </section>
+
+      <section id="credentials" class="panel">
+        <h3>Credentials</h3>
+        <ul class="list-plain">
+          <li><span>BS Information Systems</span> <b>In progress</b></li>
+          <li><span>VA Masters Skills Assessment</span> <b>Completed</b></li>
+        </ul>
+      </section>
+    </div>
+
+    <section id="services">
+      <div class="section-head">
+        <h2>Services</h2>
+        <span>What I can help with</span>
+      </div>
+      <div class="panel">
+        <ul class="list-plain">
+          <li><span>PHP/MySQL web app development</span></li>
+          <li><span>Database-backed dashboards (admin, agent, client roles)</span></li>
+          <li><span>Virtual assistant support — research, spreadsheets, lead follow-up</span></li>
+          <li><span>Process documentation and workflow cleanup</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="testimonials">
+      <div class="section-head">
+        <h2>Testimonials</h2>
+        <span>What people say after working with me</span>
+      </div>
+      <div class="testimonial-placeholder">
+        Add a quote here once you've collected one — from a professor, panel evaluator, or client.
+      </div>
+    </section>
+
+    <section id="contact" class="panel">
+      <h3><span class="icon-box">@</span>Contact</h3>
+      <p>Email: shellacatig040815@gmail.com<br> or connect on <a href="https://www.linkedin.com/in/shella-catig-a447442b0/" target="_blank" style="text-decoration:underline;">LinkedIn</a>.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>© <span id="year"></span> Shella Catig. Built with HTML &amp; CSS.</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Active nav highlighting on scroll
+  const navLinks = document.querySelectorAll('#sb-nav a');
+  const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href')));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = '#' + entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(sec => { if(sec) observer.observe(sec); });
+</script>
+
+</body>
+</html>
